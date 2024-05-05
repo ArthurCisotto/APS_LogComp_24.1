@@ -15,9 +15,8 @@ void yyerror(const char *s);
 %token <num> NUMBER
 %token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT
 %token EQ NEQ LT GT LTE GTE CHAIN SKIPCHAIN SINGLECROCHET DOUBLECROCHET TREBLECROCHET SLIPSTITCH CHANGECOLOR
-%type <str> condition expression primary_expr string_literal
-%type <num> expression relational_expr additive_expr multiplicative_expr unary_expr
-%type <num> primary_expr number
+%type <str> string_literal
+%type <num> expression relational_expr additive_expr multiplicative_expr unary_expr primary_expr number
 
 %left '+' '-'
 %left '*' '/' '%'
@@ -126,7 +125,7 @@ unary_expr: primary_expr
           ;
 
 primary_expr: number
-            | IDENTIFIER  // Se IDENTIFIER deve ser tratado como número, garanta que o tipo retornado é coerente.
+            | IDENTIFIER
             | LPAREN expression RPAREN
             ;
 
@@ -138,9 +137,6 @@ number: NUMBER
 
 string_literal: STRING
               ;
-
-param: IDENTIFIER
-     ;
 
 function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE
             ;
@@ -156,8 +152,8 @@ expression_list: expression
                | expression_list COMMA expression
                ;
 
-param_list: param
-          | param_list COMMA param
+param_list: IDENTIFIER
+          | param_list COMMA IDENTIFIER
           ;
 
 comment: COMMENT { /* Ignore comment */ }
