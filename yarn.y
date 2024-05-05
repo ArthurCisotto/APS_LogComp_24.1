@@ -2,12 +2,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+// Definindo os tokens
+#define SETUP 257
+#define LBRACE 258
+#define RBRACE 259
+#define VAR 260
+#define EQUALS 261
+#define LPAREN 262
+#define RPAREN 263
+#define SEMICOLON 264
+#define REPEAT 265
+#define FROM 266
+#define TO 267
+#define FUNCTION 268
+#define COMMA 269
+#define IF 270
+#define ELSE 271
+#define IDENTIFIER 272
+#define NUMBER 273
+#define STRING 274
+#define COMMENT 275
+
+// Estrutura para armazenar os valores dos tokens
+typedef struct {
+    char* str;
+    int num;
+} YYSTYPE;
+
+// Variáveis globais
+int currentRow = 0; // Variável para acompanhar o número atual da carreira
+
+// Protótipos de função
+void yyerror(const char *s);
+int yylex();
+int yyparse();
 %}
 
-%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA COMMENT
-%token IDENTIFIER NUMBER STRING
+%union {
+    char* str;
+    int num;
+}
 
-%start program
+%token <str> STRING IDENTIFIER
+%token <num> NUMBER
+%type <str> condition expression primary_expr
+%type <num> relational_expr additive_expr multiplicative_expr unary_expr param
+%left '+' '-'
+%left '*' '/' '%'
+%nonassoc '(' ')'
 
 %%
 
@@ -73,25 +116,28 @@ function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list
             ;
 
 param_list: /* empty */
-          | param_list COMMA IDENTIFIER
+          | param_list COMMA param
           ;
+
+param: IDENTIFIER
+     ;
 
 expression: relational_expr
           ;
 
 relational_expr: additive_expr
-               | additive_expr EQUALS additive_expr
+               | additive_expr relational_op additive_expr
                ;
 
 additive_expr: multiplicative_expr
-             | multiplicative_expr '+' additive_expr
-             | multiplicative_expr '-' additive_expr
+             | additive_expr '+' multiplicative_expr
+             | additive_expr '-' multiplicative_expr
              ;
 
 multiplicative_expr: unary_expr
-                    | unary_expr '*' multiplicative_expr
-                    | unary_expr '/' multiplicative_expr
-                    | unary_expr '%' multiplicative_expr
+                    | multiplicative_expr '*' unary_expr
+                    | multiplicative_expr '/' unary_expr
+                    | multiplicative_expr '%' unary_expr
                     ;
 
 unary_expr: primary_expr
@@ -103,6 +149,9 @@ primary_expr: NUMBER
             | IDENTIFIER
             | LPAREN expression RPAREN
             ;
+
+relational_op: "==" | "!=" | "<" | ">" | "<=" | ">="
+             ;
 
 %%
 

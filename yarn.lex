@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
-#include "yarn.tab.h" // Arquivo de cabeçalho gerado pelo Bison
+#include <stdlib.h>
+#include "yarn.tab.h"
 %}
 
 %%
@@ -18,6 +19,8 @@
 "to"                    { return TO; }
 "function"              { return FUNCTION; }
 ","                     { return COMMA; }
+"if"                    { return IF; }
+"else"                  { return ELSE; }
 "//"                    { return COMMENT; }
 
 <INITIAL>[a-zA-Z][a-zA-Z0-9_]* {
@@ -30,7 +33,7 @@
                             return NUMBER;
                         }
 
-<INITIAL>"\""([^"]|\\.)*\"" {
+<INITIAL>"\""([^"]|\\.)*\""" {
                             yylval.str = strdup(yytext);
                             return STRING;
                         }
