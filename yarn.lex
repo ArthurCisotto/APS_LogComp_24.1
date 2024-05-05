@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "yarn.tab.h"
+extern int yylex();
+void yyerror(const char *s);
 %}
 
 %%
@@ -23,11 +25,13 @@
 "else"                  { return ELSE; }
 "//".*                  { return COMMENT; }
 
+%%
+
 [a-zA-Z][a-zA-Z0-9_]*   { yylval.str = strdup(yytext); return IDENTIFIER; }
 
 [0-9]+                  { yylval.num = atoi(yytext); return NUMBER; }
 
-\"([^"]|\\.)*\"         { yylval.str = strdup(yytext); return STRING; }
+"\""([^"]|\\.)*"\""     { yylval.str = strdup(yytext); return STRING; }
 
 [ \t\n]+                ; // Ignorar espaços em branco e tabulações
 
