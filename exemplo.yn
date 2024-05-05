@@ -1,47 +1,40 @@
-// Setup inicial do projeto de cachecol
+// Configuração inicial do projeto
 setup {
-  yarnColor = "gray";  // Define a cor inicial do fio como cinza
-  hookSize = 10;       // Define o tamanho da agulha para 10mm
+  yarnColor = "red";  // Define a cor do fio como vermelho
+  hookSize = 5;       // Define o tamanho da agulha para 5mm
 };
 
-var currentRow = 1;  // Inicializa a variável de controle de carreira
+// Declaração de variável
+var rowCount = 0;
 
-// Cria a carreira de base do cachecol
-function foundationRow() {
-  chain(11);  // Cria 11 correntes para a carreira de base
+// Função para criar a base do projeto
+function createBase() {
+  chain(15);  // Cria 15 correntes
 };
 
-// Primeira carreira após a carreira de base
-function firstRow() {
-  skipChain(1);  // Pula a primeira corrente
-  repeat 10 times {
-    singleCrochet(1);  // Faz um ponto baixo em cada corrente restante
-  }
-};
-
-// carreiras subsequentes com controle explícito de cor
+// Função para uma carreira padrão
 function standardRow() {
-  if (currentRow % 2 == 0) {
-    changeYarn("white");  // Muda a cor do fio para branco nas carreiras pares
-  } else {
-    changeYarn("gray");   // Retorna para a cor cinza nas carreiras ímpares
-  }
-  chain(1);  // Faz 1 corrente e vira o trabalho
-  repeat 10 times {
-    singleCrochet(1);  // Faz um ponto baixo em cada ponto abaixo
+  repeat 15 times {
+    singleCrochet(1);  // Faz um ponto baixo em cada ponto
   }
 };
 
-// Construção do cachecol
-foundationRow();  // Executa a carreira de fundação
-firstRow();       // Executa a primeira carreira de ponto baixo
-currentRow = 2;   // Atualiza a variável de carreira
+// Condição para mudar de cor a cada 10 carreiras
+function checkColorChange() {
+  if (rowCount % 10 == 0) {
+    changeYarn("blue");  // Muda a cor para azul
+  } else {
+    changeYarn("red");   // Muda a cor para vermelho
+  }
+};
 
-// Repete a carreira padrão do cachecol para as carreiras 2 até 101
-repeat currentRow from 2 to 101 {
-  standardRow();  // Aplica a função de carreira padrão
-  currentRow = currentRow + 1;  // Incrementa o número da carreira
+// Execução das funções
+createBase();  // Cria a base do projeto
+rowCount = rowCount + 1;  // Atualiza a contagem de carreiras
+
+// Repetição principal para as carreiras do projeto
+repeat rowCount from 1 to 100 {
+  checkColorChange();  // Verifica a necessidade de mudança de cor
+  standardRow();  // Executa uma carreira padrão
+  rowCount = rowCount + 1;  // Incrementa a contagem de carreiras
 }
-
-// Finalizando o cachecol
-// Finalize o cachecol cortando o fio e escondendo as pontas soltas com uma agulha de lã.
