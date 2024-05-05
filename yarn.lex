@@ -51,6 +51,8 @@
 
 [ \t\n]+                ; // Ignorar espaços em branco e tabulações
 
+"//".*    ; // Ignora comentários
+
 .                       { return yytext[0]; } // Caracteres não reconhecidos
 
 %%
