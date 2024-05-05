@@ -1,40 +1,12 @@
-// Configuração inicial do projeto
 setup {
-  yarnColor = "red";  // Define a cor do fio como vermelho
-  hookSize = 5;       // Define o tamanho da agulha para 5mm
+  yarnColor = "red";
+  hookSize = 5;
 };
 
-// Declaração de variável
-var rowCount = 0;
+var stitchCount = 10;
 
-// Função para criar a base do projeto
-function createBase() {
-  chain(15);  // Cria 15 correntes
+function simpleRow() {
+  chain(10);
 };
 
-// Função para uma carreira padrão
-function standardRow() {
-  repeat 15 times {
-    singleCrochet(1);  // Faz um ponto baixo em cada ponto
-  }
-};
-
-// Condição para mudar de cor a cada 10 carreiras
-function checkColorChange() {
-  if (rowCount % 10 == 0) {
-    changeYarn("blue");  // Muda a cor para azul
-  } else {
-    changeYarn("red");   // Muda a cor para vermelho
-  }
-};
-
-// Execução das funções
-createBase();  // Cria a base do projeto
-rowCount = rowCount + 1;  // Atualiza a contagem de carreiras
-
-// Repetição principal para as carreiras do projeto
-repeat rowCount from 1 to 100 {
-  checkColorChange();  // Verifica a necessidade de mudança de cor
-  standardRow();  // Executa uma carreira padrão
-  rowCount = rowCount + 1;  // Incrementa a contagem de carreiras
-}
+simpleRow();
