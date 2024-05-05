@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "yarn.tab.h"
+extern int yylex();
+void yyerror(const char *s);
 %}
 
 %union {
@@ -13,11 +14,12 @@
 %token <str> STRING IDENTIFIER
 %token <num> NUMBER
 %token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT
+%token EQ NEQ LT GT LTE GTE
 %type <str> condition expression primary_expr string_literal
 %type <num> relational_expr additive_expr multiplicative_expr unary_expr param number
 %left '+' '-'
 %left '*' '/' '%'
-%nonassoc '(' ')' '==' '!=' '<' '>' '<=' '>='
+%nonassoc LPAREN RPAREN EQ NEQ LT GT LTE GTE
 
 %%
 
