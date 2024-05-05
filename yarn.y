@@ -16,7 +16,7 @@ void yyerror(const char *s);
 %token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT
 %token EQ NEQ LT GT LTE GTE
 %type <str> condition expression primary_expr string_literal
-%type <num> relational_expr additive_expr multiplicative_expr unary_expr param number
+%type <num> relational_expr additive_expr multiplicative_expr unary_expr number
 %left '+' '-'
 %left '*' '/' '%'
 %nonassoc LPAREN RPAREN EQ NEQ LT GT LTE GTE
@@ -134,6 +134,16 @@ number: NUMBER
 
 string_literal: STRING
               ;
+
+param: IDENTIFIER
+     ;
+
+function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE
+            ;
+
+param_list: param
+          | param_list COMMA param
+          ;
 
 comment: COMMENT { /* Ignore comment */ }
        ;
