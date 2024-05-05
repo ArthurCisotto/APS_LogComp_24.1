@@ -21,24 +21,16 @@
 ","                     { return COMMA; }
 "if"                    { return IF; }
 "else"                  { return ELSE; }
-"//"                    { return COMMENT; }
+"//".*                  { return COMMENT; }
 
-<INITIAL>[a-zA-Z][a-zA-Z0-9_]* {
-                            yylval.str = strdup(yytext);
-                            return IDENTIFIER;
-                        }
+[a-zA-Z][a-zA-Z0-9_]*   { yylval.str = strdup(yytext); return IDENTIFIER; }
 
-<INITIAL>[0-9]+         {
-                            yylval.num = atoi(yytext);
-                            return NUMBER;
-                        }
+[0-9]+                  { yylval.num = atoi(yytext); return NUMBER; }
 
-<INITIAL>"\""([^"]|\\.)*\""" {
-                            yylval.str = strdup(yytext);
-                            return STRING;
-                        }
+\"([^"]|\\.)*\"         { yylval.str = strdup(yytext); return STRING; }
 
-[ \t\n]                 ; // Ignorar espaços em branco e tabulações
+[ \t\n]+                ; // Ignorar espaços em branco e tabulações
+
 .                       { return yytext[0]; } // Caracteres não reconhecidos
 
 %%

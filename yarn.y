@@ -10,12 +10,14 @@
     int num;
 }
 
-%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT STRING NUMBER IDENTIFIER
-%type <str> condition expression primary_expr
-%type <num> relational_expr additive_expr multiplicative_expr unary_expr param
+%token <str> STRING IDENTIFIER
+%token <num> NUMBER
+%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT
+%type <str> condition expression primary_expr string_literal
+%type <num> relational_expr additive_expr multiplicative_expr unary_expr param number
 %left '+' '-'
 %left '*' '/' '%'
-%nonassoc '(' ')'
+%nonassoc '(' ')' '==' '!=' '<' '>' '<=' '>='
 
 %%
 
@@ -30,10 +32,10 @@ setup_commands: /* empty */
               | setup_commands hook_command
               ;
 
-yarn_command: IDENTIFIER EQUALS STRING SEMICOLON
+yarn_command: IDENTIFIER EQUALS string_literal SEMICOLON
             ;
 
-hook_command: IDENTIFIER EQUALS NUMBER SEMICOLON
+hook_command: IDENTIFIER EQUALS number SEMICOLON
             ;
 
 statement_list: /* empty */
@@ -45,47 +47,54 @@ statement: function_def
          | loop
          | conditional
          | command
-         | COMMENT
+         | comment
          ;
 
 variable_decl: VAR IDENTIFIER EQUALS expression SEMICOLON
              ;
 
-command: chain
-       | stitch
-       | change_yarn
-       | skip_chain
-       | SEMICOLON
+command: chain SEMICOLON
+       | stitch SEMICOLON
+       | change_yarn SEMICOLON
+       | skip_chain SEMICOLON
        ;
 
-chain: IDENTIFIER LPAREN NUMBER RPAREN SEMICOLON
+chain: IDENTIFIER LPAREN number RPAREN
      ;
 
-stitch: IDENTIFIER LPAREN NUMBER RPAREN SEMICOLON
+skip_chain: IDENTIFIER LPAREN number RPAREN
+          ;
+
+stitch: single_crochet
+      | double_crochet
+      | treble_crochet
+      | slip_stitch
       ;
 
-change_yarn: IDENTIFIER LPAREN STRING RPAREN SEMICOLON
+single_crochet: IDENTIFIER LPAREN number RPAREN
+              ;
+
+double_crochet: IDENTIFIER LPAREN number RPAREN
+              ;
+
+treble_crochet: IDENTIFIER LPAREN number RPAREN
+              ;
+
+slip_stitch: IDENTIFIER LPAREN number RPAREN
+            ;
+
+change_yarn: IDENTIFIER LPAREN string_literal RPAREN
            ;
 
-skip_chain: IDENTIFIER LPAREN NUMBER RPAREN SEMICOLON
-          ;
-
-loop: REPEAT IDENTIFIER FROM NUMBER TO NUMBER LBRACE statement_list RBRACE
+loop: REPEAT IDENTIFIER FROM number TO number LBRACE statement_list RBRACE
     ;
 
-conditional: IF expression LBRACE statement_list RBRACE
-            | IF expression LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+conditional: IF condition LBRACE statement_list RBRACE
+            | IF condition LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
             ;
 
-function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE
-            ;
-
-param_list: /* empty */
-          | param_list COMMA param
-          ;
-
-param: IDENTIFIER
-     ;
+condition: expression
+         ;
 
 expression: relational_expr
           ;
@@ -110,13 +119,22 @@ unary_expr: primary_expr
           | '-' primary_expr
           ;
 
-primary_expr: NUMBER
+primary_expr: number
             | IDENTIFIER
             | LPAREN expression RPAREN
             ;
 
 relational_op: "==" | "!=" | "<" | ">" | "<=" | ">="
              ;
+
+number: NUMBER
+      ;
+
+string_literal: STRING
+              ;
+
+comment: COMMENT { /* Ignore comment */ }
+       ;
 
 %%
 
