@@ -1,6 +1,4 @@
 %{
-#include <stdio.h>
-#include <stdlib.h>
 #include "yarn.tab.h"
 %}
 
@@ -49,14 +47,10 @@
 
 \"([^"]|\\.)*\"         { yylval.str = strdup(yytext); return STRING; }
 
-[ \t\n]+                ; // Ignorar espaços em branco e tabulações
+[ \t\n]+                ; // Ignora espaços em branco e tabulações
 
 "//".*    ; // Ignora comentários
 
 .                       { return yytext[0]; } // Caracteres não reconhecidos
 
 %%
-
-int yywrap() {
-    return 1;
-}
