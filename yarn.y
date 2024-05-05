@@ -11,7 +11,7 @@ void yyerror(const char *s);
     int num;
 }
 
-%token <str> STRING IDENTIFIER
+%token <str> STRING IDENTIFIER YARNCOLOR HOOKSIZE
 %token <num> NUMBER
 %token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT
 %token EQ NEQ LT GT LTE GTE CHAIN SKIPCHAIN SINGLECROCHET DOUBLECROCHET TREBLECROCHET SLIPSTITCH CHANGECOLOR
@@ -34,10 +34,10 @@ setup_commands: /* empty */
               | setup_commands hook_command
               ;
 
-yarn_command: "yarnColor" EQUALS string_literal SEMICOLON
+yarn_command: YARNCOLOR EQUALS string_literal SEMICOLON
             ;
 
-hook_command: "hookSize" EQUALS number SEMICOLON
+hook_command: HOOKSIZE EQUALS number SEMICOLON
             ;
 
 statement_list: /* empty */
@@ -53,6 +53,9 @@ statement: function_def
          | function_call
          | comment
          ;
+
+assignment_statement: IDENTIFIER EQUALS expression SEMICOLON
+                    ;
 
 variable_decl: VAR IDENTIFIER EQUALS expression SEMICOLON
              ;

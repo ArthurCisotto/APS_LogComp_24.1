@@ -22,8 +22,8 @@
 "if"                    { return IF; }
 "else"                  { return ELSE; }
 "//"                    { return COMMENT; }
-"yarnColor"             { return CHAIN; }
-"hookSize"              { return SKIPCHAIN; }
+"yarnColor"             { return YARNCOLOR; }
+"hookSize"              { return HOOKSIZE; }
 "chain"                 { return CHAIN; }
 "skipChain"             { return SKIPCHAIN; }
 "singleCrochet"         { return SINGLECROCHET; }
