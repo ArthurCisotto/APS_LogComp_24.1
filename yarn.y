@@ -2,41 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-// Definindo os tokens
-#define SETUP 257
-#define LBRACE 258
-#define RBRACE 259
-#define VAR 260
-#define EQUALS 261
-#define LPAREN 262
-#define RPAREN 263
-#define SEMICOLON 264
-#define REPEAT 265
-#define FROM 266
-#define TO 267
-#define FUNCTION 268
-#define COMMA 269
-#define IF 270
-#define ELSE 271
-#define IDENTIFIER 272
-#define NUMBER 273
-#define STRING 274
-#define COMMENT 275
-
-// Estrutura para armazenar os valores dos tokens
-typedef struct {
-    char* str;
-    int num;
-} YYSTYPE;
-
-// Variáveis globais
-int currentRow = 0; // Variável para acompanhar o número atual da carreira
-
-// Protótipos de função
-void yyerror(const char *s);
-int yylex();
-int yyparse();
+#include "yarn.tab.h" // Inclua o arquivo de cabeçalho gerado pelo Bison
 %}
 
 %union {
@@ -44,6 +10,7 @@ int yyparse();
     int num;
 }
 
+%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT // Defina todos os tokens aqui
 %token <str> STRING IDENTIFIER
 %token <num> NUMBER
 %type <str> condition expression primary_expr
