@@ -14,7 +14,7 @@ void yyerror(const char *s);
 %token <str> STRING IDENTIFIER
 %token <num> NUMBER
 %token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT
-%token EQ NEQ LT GT LTE GTE
+%token EQ NEQ LT GT LTE GTE CHAIN SKIPCHAIN SINGLECROCHET DOUBLECROCHET TREBLECROCHET SLIPSTITCH CHANGECOLOR
 %type <str> condition expression primary_expr string_literal
 %type <num> relational_expr additive_expr multiplicative_expr unary_expr number
 %left '+' '-'
@@ -34,10 +34,10 @@ setup_commands: /* empty */
               | setup_commands hook_command
               ;
 
-yarn_command: IDENTIFIER EQUALS string_literal SEMICOLON
+yarn_command: "yarnColor" EQUALS string_literal SEMICOLON
             ;
 
-hook_command: IDENTIFIER EQUALS number SEMICOLON
+hook_command: "hookSize" EQUALS number SEMICOLON
             ;
 
 statement_list: /* empty */
@@ -61,10 +61,10 @@ command: chain SEMICOLON
        | skip_chain SEMICOLON
        ;
 
-chain: IDENTIFIER LPAREN number RPAREN
+chain: CHAIN LPAREN number RPAREN
      ;
 
-skip_chain: IDENTIFIER LPAREN number RPAREN
+skip_chain: SKIPCHAIN LPAREN number RPAREN
           ;
 
 stitch: single_crochet
@@ -73,19 +73,19 @@ stitch: single_crochet
       | slip_stitch
       ;
 
-single_crochet: IDENTIFIER LPAREN number RPAREN
+single_crochet: SINGLECROCHET LPAREN number RPAREN
               ;
 
-double_crochet: IDENTIFIER LPAREN number RPAREN
+double_crochet: DOUBLECROCHET LPAREN number RPAREN
               ;
 
-treble_crochet: IDENTIFIER LPAREN number RPAREN
+treble_crochet: TREBLECROCHET LPAREN number RPAREN
               ;
 
-slip_stitch: IDENTIFIER LPAREN number RPAREN
+slip_stitch: SLIPSTITCH LPAREN number RPAREN
             ;
 
-change_yarn: IDENTIFIER LPAREN string_literal RPAREN
+change_yarn: CHANGECOLOR LPAREN string_literal RPAREN
            ;
 
 loop: REPEAT IDENTIFIER FROM number TO number LBRACE statement_list RBRACE
@@ -126,7 +126,7 @@ primary_expr: number
             | LPAREN expression RPAREN
             ;
 
-relational_op: "==" | "!=" | "<" | ">" | "<=" | ">="
+relational_op: EQ | NEQ | LT | GT | LTE | GTE
              ;
 
 number: NUMBER

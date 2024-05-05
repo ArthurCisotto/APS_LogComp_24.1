@@ -21,7 +21,27 @@
 ","                     { return COMMA; }
 "if"                    { return IF; }
 "else"                  { return ELSE; }
-"//".*                  { return COMMENT; }
+"//"                    { return COMMENT; }
+"yarnColor"             { return CHAIN; }
+"hookSize"              { return SKIPCHAIN; }
+"chain"                 { return CHAIN; }
+"skipChain"             { return SKIPCHAIN; }
+"singleCrochet"         { return SINGLECROCHET; }
+"doubleCrochet"         { return DOUBLECROCHET; }
+"trebleCrochet"         { return TREBLECROCHET; }
+"slipStitch"            { return SLIPSTITCH; }
+"changeYarn"            { return CHANGECOLOR; }
+"=="                    { return EQ; }
+"!="                    { return NEQ; }
+"<"                     { return LT; }
+"<="                    { return LTE; }
+">"                     { return GT; }
+">="                    { return GTE; }
+"+"                     { return '+'; }
+"-"                     { return '-'; }
+"*"                     { return '*'; }
+"/"                     { return '/'; }
+"%"                     { return '%'; }
 
 [a-zA-Z][a-zA-Z0-9_]*   { yylval.str = strdup(yytext); return IDENTIFIER; }
 
