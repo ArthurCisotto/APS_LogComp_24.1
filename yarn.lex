@@ -3,10 +3,9 @@
 %}
 
 %%
-
-"setup"                 { return SETUP; }
-"{"                     { return LBRACE; }
-"}"                     { return RBRACE; }
+"setup" { printf("Token: SETUP\n"); return SETUP; }
+"{"    { printf("Token: LBRACE\n"); return LBRACE; }
+"}"    { printf("Token: RBRACE\n"); return RBRACE; }
 "var"                   { return VAR; }
 "="                     { return EQUALS; }
 "("                     { return LPAREN; }
