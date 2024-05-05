@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "yarn.tab.h" // Inclua o arquivo de cabeçalho gerado pelo Bison
+#include "yarn.tab.h"
 %}
 
 %union {
@@ -10,9 +10,7 @@
     int num;
 }
 
-%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT // Defina todos os tokens aqui
-%token <str> STRING IDENTIFIER
-%token <num> NUMBER
+%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE COMMENT STRING NUMBER IDENTIFIER
 %type <str> condition expression primary_expr
 %type <num> relational_expr additive_expr multiplicative_expr unary_expr param
 %left '+' '-'
