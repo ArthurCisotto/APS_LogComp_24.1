@@ -1,0 +1,8 @@
+setup {
+    yarnColor = "gray";
+    hookSize = 10;
+};
+
+repeat row from 1 to 10 {
+    chain(10);
+}
