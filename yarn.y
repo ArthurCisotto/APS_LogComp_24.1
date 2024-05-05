@@ -44,22 +44,26 @@ statement_list: /* empty */
               | statement_list statement
               ;
 
-statement: variable_decl
+statement: function_def
+         | variable_decl
+         | loop
+         | conditional
          | command
          | assignment_statement
          | function_call
+         | comment
          ;
-
-assignment_statement: IDENTIFIER EQUALS expression SEMICOLON
-                    ;
 
 variable_decl: VAR IDENTIFIER EQUALS expression SEMICOLON
              ;
 
-
-command: chain
-       | skip_chain
-       | single_crochet
+command: chain SEMICOLON
+       | skip_chain SEMICOLON
+       | single_crochet SEMICOLON
+       | double_crochet SEMICOLON
+       | treble_crochet SEMICOLON
+       | slip_stitch SEMICOLON
+       | change_yarn SEMICOLON
        ;
 
 chain: CHAIN LPAREN number RPAREN
@@ -67,12 +71,6 @@ chain: CHAIN LPAREN number RPAREN
 
 skip_chain: SKIPCHAIN LPAREN number RPAREN
           ;
-
-stitch: single_crochet
-      | double_crochet
-      | treble_crochet
-      | slip_stitch
-      ;
 
 single_crochet: SINGLECROCHET LPAREN number RPAREN
               ;
@@ -101,7 +99,6 @@ condition: expression
 
 expression: relational_expr
           ;
-
 
 relational_expr: additive_expr
                | additive_expr relational_op additive_expr
@@ -140,7 +137,7 @@ string_literal: STRING
 param: IDENTIFIER
      ;
 
-function_def: FUNCTION IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE
+function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE
             ;
 
 function_call: IDENTIFIER LPAREN opt_arguments RPAREN SEMICOLON
