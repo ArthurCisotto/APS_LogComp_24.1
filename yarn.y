@@ -25,10 +25,14 @@ void yyerror(const char *s);
 %%
 
 program: setup_block statement_list
-       ;
+       {
+           printf("Completed parsing program.\n");
+       };
 
 setup_block: SETUP LBRACE setup_commands RBRACE
-           ;
+           {
+               printf("Setup block parsed.\n");
+           };
 
 setup_commands: /* empty */
               | setup_commands yarn_command
