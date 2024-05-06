@@ -65,16 +65,12 @@ statement: function_def
          | NEWLINE
          ;
 
+assignment_statement: IDENTIFIER EQUALS expression SEMICOLON
+                      { printf("Parsed assignment statement.\n"); }
+                      ;
+
 variable_decl: VAR IDENTIFIER EQUALS expression SEMICOLON
               { printf("Parsed variable declaration.\n"); }
-              ;
-
-function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE SEMICOLON
-            { printf("Parsed function definition.\n"); }
-            ;
-
-function_call: IDENTIFIER LPAREN opt_arguments RPAREN SEMICOLON
-              { printf("Parsed function call.\n"); }
               ;
 
 command: chain SEMICOLON
@@ -85,7 +81,6 @@ command: chain SEMICOLON
        | slip_stitch SEMICOLON
        | change_yarn SEMICOLON
        ;
-
 
 chain: CHAIN LPAREN number RPAREN
       { printf("Parsed chain command.\n"); }
@@ -172,6 +167,14 @@ number: NUMBER
 string_literal: STRING
                { printf("Parsed string literal.\n"); }
                ;
+
+function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE SEMICOLON
+            { printf("Parsed function definition.\n"); }
+            ;
+
+function_call: IDENTIFIER LPAREN opt_arguments RPAREN SEMICOLON
+              { printf("Parsed function call.\n"); }
+              ;
 
 opt_arguments: /* empty */
              | expression_list
