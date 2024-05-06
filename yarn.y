@@ -32,8 +32,9 @@ setup_block: SETUP LBRACE optional_newlines setup_commands optional_newlines RBR
            ;
 
 optional_newlines:
-          | NEWLINE optional_newlines
-          ;
+          /* empty */
+        | optional_newlines NEWLINE
+        ;
 
 setup_commands: /* empty */
               | setup_commands yarn_command
@@ -49,7 +50,7 @@ hook_command: HOOKSIZE EQUALS number SEMICOLON
              ;
 
 statement_list: /* empty */
-              | statement_list statement
+              | statement_list statement optional_newlines
               ;
 
 statement: function_def
