@@ -9,7 +9,8 @@ var currentRow = 1;  // Inicializa a variável de controle de carreira
 chain(11);  // Cria 11 correntes para a carreira de base
 
 skipChain(1);  // Pula a primeira corrente
-repeat 10 times {
+var i = 1;      // Inicializa a variável de controle de pontos
+repeat i from 1 to 10 {
   singleCrochet(1);  // Faz um ponto baixo em cada corrente restante
 }
 
@@ -23,7 +24,8 @@ repeat currentRow from 2 to 101 {
     changeYarn("gray");   // Retorna para a cor cinza nas carreiras ímpares
   }
   chain(1);  // Faz 1 corrente e vira o trabalho
-  repeat 10 times {
+  var i = 1;  // Inicializa a variável de controle de pontos
+  repeat i from 1 to 10 {
     singleCrochet(1);  // Faz um ponto baixo em cada ponto abaixo
   }
   currentRow = currentRow + 1;  // Incrementa o número da carreira
