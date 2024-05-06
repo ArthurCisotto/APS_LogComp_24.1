@@ -5,8 +5,9 @@ setup {
 
 var stitchCount = 10;
 
-function simpleRow() {
-  chain(10);
-};
+currentRow = 2;   // Atualiza a variável de carreira
 
-simpleRow();
+// Repete a carreira padrão do cachecol para as carreiras 2 até 101
+repeat currentRow from 2 to 101 {
+  currentRow = currentRow + 1;  // Incrementa o número da carreira
+}
