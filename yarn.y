@@ -146,8 +146,9 @@ multiplicative_expr: unary_expr
                     ;
 
 unary_expr: primary_expr
-          | '+' primary_expr { $$ = $2; }
-          | '-' primary_expr { $$ = -$2; }
+          | '+' primary_expr
+          | '-' primary_expr
+          { printf("Parsed unary expression.\n"); }
           ;
 
 primary_expr: number
