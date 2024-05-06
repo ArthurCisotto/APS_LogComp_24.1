@@ -37,8 +37,8 @@ optional_newlines:
         ;
 
 setup_commands: /* empty */
-              | setup_commands yarn_command
-              | setup_commands hook_command
+              | setup_commands yarn_command optional_newlines
+              | setup_commands hook_command optional_newlines
               ;
 
 yarn_command: YARNCOLOR EQUALS string_literal SEMICOLON
