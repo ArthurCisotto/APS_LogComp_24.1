@@ -27,9 +27,13 @@ program: setup_block statement_list
         { printf("Completed parsing program.\n"); }
         ;
 
-setup_block: SETUP LBRACE setup_commands RBRACE
-            { printf("Setup block parsed.\n"); }
-            ;
+setup_block: SETUP LBRACE optional_newlines setup_commands optional_newlines RBRACE
+           { printf("Setup block parsed.\n"); }
+           ;
+
+optional_newlines:
+          | NEWLINE optional_newlines
+          ;
 
 setup_commands: /* empty */
               | setup_commands yarn_command
