@@ -23,7 +23,7 @@ void yyerror(const char *s);
 %nonassoc LPAREN RPAREN EQ NEQ LT GT LTE GTE
 
 %%
-program: setup_block statement_list
+program: setup_block statement_list EOF
         { printf("Completed parsing program.\n"); }
         ;
 
@@ -168,7 +168,7 @@ string_literal: STRING
                { printf("Parsed string literal.\n"); }
                ;
 
-function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE SEMICOLON
+function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE
             { printf("Parsed function definition.\n"); }
             ;
 
