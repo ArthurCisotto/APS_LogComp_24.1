@@ -1,2 +1,4 @@
 setup {
+  yarnColor = "red";
+  hookSize = 5;
 };

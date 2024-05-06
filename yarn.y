@@ -27,7 +27,7 @@ program: setup_block statement_list END_OF_FILE
         { printf("Completed parsing program.\n"); }
         ;
 
-setup_block: SETUP LBRACE optional_newlines setup_commands optional_newlines RBRACE
+setup_block: SETUP LBRACE optional_newlines setup_commands optional_newlines RBRACE SEMICOLON
            { printf("Setup block parsed.\n"); }
            ;
 
