@@ -29,7 +29,7 @@ program: setup_block statement_list END_OF_FILE
         }
         ;
 
-setup_block: SETUP LBRACE optional_newlines setup_commands optional_newlines RBRACE SEMICOLON
+setup_block: optional_newlines SETUP LBRACE optional_newlines setup_commands optional_newlines RBRACE SEMICOLON
            { printf("Setup block parsed.\n"); }
            ;
 
