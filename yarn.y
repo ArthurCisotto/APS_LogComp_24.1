@@ -63,6 +63,7 @@ statement: function_def
          | function_call
          | comment
          | NEWLINE
+         | END_OF_FILE
          ;
 
 assignment_statement: IDENTIFIER EQUALS expression SEMICOLON
