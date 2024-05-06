@@ -200,6 +200,7 @@ void yyerror(const char *s) {
 }
 
 int main() {
+    printf("yyparse() returned %d\n", yyparse());
     if (yyparse() == 0) {
         printf("Parsing completed successfully.\n");
         return 0;
