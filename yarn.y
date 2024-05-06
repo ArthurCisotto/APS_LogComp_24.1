@@ -23,7 +23,7 @@ void yyerror(const char *s);
 %nonassoc LPAREN RPAREN EQ NEQ LT GT LTE GTE
 
 %%
-program: setup_block statement_list YYEOF
+program: setup_block statement_list <<EOF>>
         { printf("Completed parsing program.\n"); }
         ;
 
@@ -146,9 +146,8 @@ multiplicative_expr: unary_expr
                     ;
 
 unary_expr: primary_expr
-          | '+' primary_expr
-          | '-' primary_expr
-          { printf("Parsed unary expression.\n"); }
+          | '+' primary_expr { $$ = $2; }
+          | '-' primary_expr { $$ = -$2; }
           ;
 
 primary_expr: number
