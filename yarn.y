@@ -24,7 +24,9 @@ void yyerror(const char *s);
 
 %%
 program: setup_block statement_list END_OF_FILE
-        { printf("Completed parsing program.\n"); }
+        { printf("Completed parsing program.\n");
+            return 0;
+        }
         ;
 
 setup_block: SETUP LBRACE optional_newlines setup_commands optional_newlines RBRACE SEMICOLON
