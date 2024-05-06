@@ -15,8 +15,6 @@
 "repeat"                { printf("Token: REPEAT\n"); return REPEAT; }
 "from"                  { printf("Token: FROM\n"); return FROM; }
 "to"                    { printf("Token: TO\n"); return TO; }
-"function"              { printf("Token: FUNCTION\n"); return FUNCTION; }
-","                     { printf("Token: COMMA\n"); return COMMA; }
 "if"                    { printf("Token: IF\n"); return IF; }
 "else"                  { printf("Token: ELSE\n"); return ELSE; }
 "//"                    { printf("Token: COMMENT\n"); return COMMENT; }

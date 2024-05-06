@@ -13,7 +13,7 @@ void yyerror(const char *s);
 
 %token <str> STRING IDENTIFIER YARNCOLOR HOOKSIZE
 %token <num> NUMBER
-%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO FUNCTION COMMA IF ELSE NEWLINE COMMENT END_OF_FILE
+%token SETUP LBRACE RBRACE VAR EQUALS LPAREN RPAREN SEMICOLON REPEAT FROM TO IF ELSE NEWLINE COMMENT END_OF_FILE
 %token EQ NEQ LT GT LTE GTE CHAIN SKIPCHAIN SINGLECROCHET DOUBLECROCHET TREBLECROCHET SLIPSTITCH CHANGECOLOR
 %type <str> string_literal
 %type <num> expression relational_expr additive_expr multiplicative_expr unary_expr primary_expr number
@@ -56,13 +56,11 @@ statement_list: /* empty */
               | statement_list statement NEWLINE
               ;
 
-statement: function_def
-         | variable_decl
+statement: variable_decl
          | loop
          | conditional
          | command
          | assignment_statement
-         | function_call
          | comment
          | NEWLINE
          ;
@@ -169,28 +167,6 @@ number: NUMBER
 string_literal: STRING
                { printf("Parsed string literal.\n"); }
                ;
-
-function_def: FUNCTION IDENTIFIER LPAREN param_list RPAREN LBRACE statement_list RBRACE
-            { printf("Parsed function definition.\n"); }
-            ;
-
-function_call: IDENTIFIER LPAREN opt_arguments RPAREN SEMICOLON
-              { printf("Parsed function call.\n"); }
-              ;
-
-opt_arguments: /* empty */
-             | expression_list
-             ;
-
-expression_list: expression
-               | expression_list COMMA expression
-               { printf("Parsed expression list.\n"); }
-               ;
-
-param_list: IDENTIFIER
-          | param_list COMMA IDENTIFIER
-          { printf("Parsed parameter list.\n"); }
-          ;
 
 comment: COMMENT { /* Ignore comment */ }
        ;

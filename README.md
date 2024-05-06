@@ -17,8 +17,6 @@ Ao aprender sobre linguagens formais, percebi que os padrões de crochê têm mu
   - **Loops**: Para repetir sequências de pontos, facilitando a criação de padrões complexos sem a necessidade de reescrever os comandos várias vezes.
   - **Condicionais**: Para introduzir mudanças no padrão baseando-se em condições específicas, como alterações na cor do fio após certas carreiras, permitindo a personalização avançada dos projetos.
 
-- **Definir e Reutilizar Funções**: Os usuários podem encapsular padrões de crochê em funções, que podem ser reutilizadas ao longo de diferentes projetos, promovendo a modularidade e reusabilidade.
-
 - **Comentar o Código**: Assim como em outras linguagens de programação, Yarn suporta a adição de comentários para explicar partes do código, facilitando a compreensão e manutenção dos padrões.
 
 ### EBNF para Yarn
@@ -31,7 +29,7 @@ setup_commands = { yarn_command | hook_command } ;
 yarn_command = "yarnColor", "=", string_literal ;
 hook_command = "hookSize", "=", number ;
 
-statement = function_def | variable_decl | loop | conditional | command | comment ;
+statement =  variable_decl | loop | conditional | command | comment ;
 
 variable_decl = "var", identifier, "=", expression, ";" ;
 
@@ -61,9 +59,6 @@ relational_op = "==" | "!=" | "<" | ">" | "<=" | ">=" ;
 add_op = "+" | "-" ;
 mul_op = "*" | "/" | "%" ;
 
-function_def = "function", identifier, "(", [ param_list ], ")", "{", { statement }, "}" ;
-param_list = param { ",", param } ;
-param = identifier ;
 
 comment = "//", { all_characters } ;
 
@@ -88,40 +83,28 @@ setup {
 
 var currentRow = 1;  // Inicializa a variável de controle de carreira
 
-// Cria a carreira de base do cachecol
-function foundationRow() {
-  chain(11);  // Cria 11 correntes para a carreira de base
-};
+chain(11);  // Cria 11 correntes para a carreira de base
 
-// Primeira carreira após a carreira de base
-function firstRow() {
-  skipChain(1);  // Pula a primeira corrente
-  repeat 10 times {
-    singleCrochet(1);  // Faz um ponto baixo em cada corrente restante
-  }
-};
+skipChain(1);  // Pula a primeira corrente
+var i = 1;      // Inicializa a variável de controle de pontos
+repeat i from 1 to 10 {
+  singleCrochet(1);  // Faz um ponto baixo em cada corrente restante
+}
 
-// carreiras subsequentes com controle explícito de cor
-function standardRow() {
+currentRow = 2;   // Atualiza a variável de carreira
+
+// Repete a carreira padrão do cachecol para as carreiras 2 até 101
+repeat currentRow from 2 to 101 {
   if (currentRow % 2 == 0) {
     changeYarn("white");  // Muda a cor do fio para branco nas carreiras pares
   } else {
     changeYarn("gray");   // Retorna para a cor cinza nas carreiras ímpares
   }
   chain(1);  // Faz 1 corrente e vira o trabalho
-  repeat 10 times {
+  var i = 1;  // Inicializa a variável de controle de pontos
+  repeat i from 1 to 10 {
     singleCrochet(1);  // Faz um ponto baixo em cada ponto abaixo
   }
-};
-
-// Construção do cachecol
-foundationRow();  // Executa a carreira de fundação
-firstRow();       // Executa a primeira carreira de ponto baixo
-currentRow = 2;   // Atualiza a variável de carreira
-
-// Repete a carreira padrão do cachecol para as carreiras 2 até 101
-repeat currentRow from 2 to 101 {
-  standardRow();  // Aplica a função de carreira padrão
   currentRow = currentRow + 1;  // Incrementa o número da carreira
 }
 

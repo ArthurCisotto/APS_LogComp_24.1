@@ -1,9 +1,0 @@
-// Setup inicial do projeto de cachecol
-setup {
-  yarnColor = "gray";  // Define a cor inicial do fio como cinza
-  hookSize = 10;       // Define o tamanho da agulha para 10mm
-};
-
-function foundationRow() {
-  chain(11);  // Cria 11 correntes para a carreira de base
-};
