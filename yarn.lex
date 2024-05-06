@@ -40,9 +40,9 @@
 "*"                     { printf("Token: *\n"); return '*'; }
 "/"                     { printf("Token: /\n"); return '/'; }
 "%"                     { printf("Token: %\n"); return '%'; }
-[a-zA-Z][a-zA-Z0-9_]*   { yylval.str = strdup(yytext); return IDENTIFIER; }
-[0-9]+                  { yylval.num = atoi(yytext); return NUMBER; }
-\"([^"]|\\.)*\"         { yylval.str = strdup(yytext); return STRING; }
+[a-zA-Z][a-zA-Z0-9_]*   { printf("Debug: Captured IDENTIFIER '%s'\n", yytext); yylval.str = strdup(yytext); return IDENTIFIER; }
+[0-9]+                  { printf("Debug: Captured NUMBER '%s'\n", yytext); yylval.num = atoi(yytext); return NUMBER; }
+\"([^"]|\\.)*\"         { printf("Debug: Captured STRING '%s'\n", yytext); yylval.str = strdup(yytext); return STRING; }
 [ \t\r]+                ; // Ignora espaços em branco, tabulações e retorno de carro
 "\n"                    { printf("Token: NEWLINE\n"); return NEWLINE; } // Trata quebras de linha explicitamente
 "//".*                  ; // Ignora comentários
