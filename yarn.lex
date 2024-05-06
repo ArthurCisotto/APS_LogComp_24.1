@@ -47,5 +47,5 @@
 "\n"                    { printf("Token: NEWLINE\n"); return NEWLINE; } // Trata quebras de linha explicitamente
 "//".*                  ; // Ignora comentários
 .                       { return yytext[0]; } // Caracteres não reconhecidos
-
+<<EOF>> { return END_OF_FILE; }
 %%

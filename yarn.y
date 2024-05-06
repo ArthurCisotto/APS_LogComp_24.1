@@ -23,7 +23,7 @@ void yyerror(const char *s);
 %nonassoc LPAREN RPAREN EQ NEQ LT GT LTE GTE
 
 %%
-program: setup_block statement_list <EOF>
+program: setup_block statement_list END_OF_FILE
         { printf("Completed parsing program.\n"); }
         ;
 
