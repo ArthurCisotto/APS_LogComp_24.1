@@ -1,6 +1,8 @@
+//Exemplo 1: Cachecol de crochê simples alternando entre duas cores em carreiras pares e ímpares
+
 // Setup inicial do projeto de cachecol
 setup {
-  yarnColor = "red";  // Define a cor inicial do fio como vermelho
+  yarnColor = "magenta";  // Define a cor inicial do fio como rosa
   hookSize = 10;       // Define o tamanho da agulha para 10mm
 };
 
@@ -22,9 +24,9 @@ function firstRow() {
 // carreiras subsequentes com controle explícito de cor
 function standardRow(row) {
   if (row % 2 == 0) {
-    changeYarn("white");  // Muda a cor do fio para branco nas carreiras pares
+    changeYarn("green");  // Muda a cor do fio para verde nas carreiras pares
   } else {
-    changeYarn("red");   // Retorna para a cor cinza nas carreiras ímpares
+    changeYarn("magenta");   // Retorna para a cor cinza nas carreiras ímpares
   }
   chain(1);  // Faz 1 corrente e vira o trabalho
   var j = 1;  // Inicializa a variável de controle de pontos
@@ -41,7 +43,7 @@ turnWork();       // Vira o trabalho para a próxima carreira
 var currentRow = 2;   // Declara a variável de carreira
 
 // Repete a carreira padrão do cachecol para as carreiras 2 até 101
-repeat currentRow from 2 to 11 {
+repeat currentRow from 2 to 101 {
   standardRow(currentRow);  // Aplica a função de carreira padrão
   turnWork();  // Vira o trabalho para a próxima carreira
   currentRow = currentRow + 1;  // Incrementa o número da carreira

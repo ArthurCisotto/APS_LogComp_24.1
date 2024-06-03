@@ -1,0 +1,207 @@
+// Exemplo 2: Cachecol com a palavra "ARTHUR"
+
+// Setup inicial do projeto de cachecol
+setup {
+  yarnColor = "black";  // Define a cor inicial do fio como preto
+  hookSize = 6;       // Define o tamanho da agulha para 6mm
+};
+
+// Cria a carreira de base do cachecol
+function foundationRow() {
+  chain(5);  // Cria 5 correntes para a carreira de base
+};
+
+function letraA() {
+    // Cria a letra A
+
+    doubleCrochet(2);  // Faz 2 pontos baixos
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 2 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(2);  // Faz 2 pontos baixos
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(3);  // Faz 3 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+    
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(5);  // Faz 5 pontos baixos
+    turnWork();  // Vira o trabalho
+
+};
+
+function letraR() {
+    // Cria a letra R
+
+    doubleCrochet(1);  // Faz 2 pontos baixos
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(2);  // Faz 2 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(2);  // Faz 2 pontos baixos
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(2);  // Faz 3 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(2);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+    
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(5);  // Faz 5 pontos baixos
+    turnWork();  // Vira o trabalho
+};
+
+function letraT() {
+    // Cria a letra T
+
+    doubleCrochet(1);  // Faz 2 pontos baixos
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(3);  // Faz 2 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 2 pontos baixos
+    turnWork();  // Vira o trabalho
+
+    var i;
+
+    repeat i from 1 to 3 {
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(2);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(2);  // Faz 1 ponto baixo
+        turnWork();  // Vira o trabalho
+    }
+    doubleCrochet(5);  // Faz 5 pontos baixos
+    turnWork();  // Vira o trabalho
+};
+
+function letraH(){
+    
+    var i;
+
+    repeat i from 1 to 2 {
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        turnWork();  // Vira o trabalho
+    }
+
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(3);  // Faz 3 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+
+    repeat i from 1 to 2 {
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        turnWork();  // Vira o trabalho
+    }
+
+    doubleCrochet(5);  // Faz 5 pontos baixos
+    turnWork();  // Vira o trabalho
+
+};
+
+function letraU(){
+
+    var i;
+
+    repeat i from 1 to 3 {
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("yellow"); // Muda a cor do fio para amarelo
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        changeYarn("black"); // Muda a cor do fio para preto
+        doubleCrochet(1);  // Faz 1 ponto baixo
+        turnWork();  // Vira o trabalho
+    }
+
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    changeYarn("yellow"); // Muda a cor do fio para amarelo
+    doubleCrochet(3);  // Faz 3 pontos baixos
+    changeYarn("black"); // Muda a cor do fio para preto
+    doubleCrochet(1);  // Faz 1 ponto baixo
+    turnWork();  // Vira o trabalho
+
+    doubleCrochet(5);  // Faz 5 pontos baixos
+    turnWork();  // Vira o trabalho
+
+};
+
+
+// Cachecol que exibe a palavra "ARTHUR"
+
+foundationRow();  // Cria a carreira de base
+turnWork();  // Vira o trabalho
+letraA();  // Cria a letra A
+letraR();  // Cria a letra R
+letraT();  // Cria a letra T
+letraH();  // Cria a letra H
+letraU();  // Cria a letra U
+letraR();  // Cria a letra R

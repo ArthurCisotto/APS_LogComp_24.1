@@ -36,12 +36,13 @@ variable_decl = "var", identifier, "=", expression, ";" ;
 command = ( chain | stitch | change_yarn | skip_chain ), ";" ;
 chain = "chain", "(", number, ")" ;
 skip_chain = "skipChain", "(", number, ")" ;
-stitch = single_crochet | double_crochet | treble_crochet | slip_stitch ;
+stitch = single_crochet | double_crochet | treble_crochet | slip_stitch | turn_work ;
 single_crochet = "singleCrochet", "(", number, ")" ;
 double_crochet = "doubleCrochet", "(", number, ")" ;
 treble_crochet = "trebleCrochet", "(", number, ")" ;
 slip_stitch = "slipStitch", "(", number, ")" ;
 change_yarn = "changeYarn", "(", string_literal, ")" ;
+turn_work = "turnWork", "(", ")" ;
 
 loop = "repeat", identifier, "from", number, "to", number, "{", { statement }, "}" ;
 
@@ -80,34 +81,50 @@ whitespace = " " | tab | newline ;
 ```yarn
 // Setup inicial do projeto de cachecol
 setup {
-  yarnColor = "gray";  // Define a cor inicial do fio como cinza
+  yarnColor = "red";  // Define a cor inicial do fio como vermelho
   hookSize = 10;       // Define o tamanho da agulha para 10mm
 };
 
-var currentRow = 1;  // Inicializa a variável de controle de carreira
+// Cria a carreira de base do cachecol
+function foundationRow() {
+  chain(11);  // Cria 11 correntes para a carreira de base
+};
 
-chain(11);  // Cria 11 correntes para a carreira de base
+// Primeira carreira após a carreira de base
+function firstRow() {
+  skipChain(1);  // Pula a primeira corrente
+  var i = 1;      // Inicializa a variável de controle de pontos
+  repeat i from 1 to 10 {
+    singleCrochet(1);  // Faz um ponto baixo em cada corrente restante
+  }
+};
 
-skipChain(1);  // Pula a primeira corrente
-var i = 1;      // Inicializa a variável de controle de pontos
-repeat i from 1 to 10 {
-  singleCrochet(1);  // Faz um ponto baixo em cada corrente restante
-}
 
-currentRow = 2;   // Atualiza a variável de carreira
+// carreiras subsequentes com controle explícito de cor
+function standardRow(row) {
+  if (row % 2 == 0) {
+    changeYarn("white");  // Muda a cor do fio para branco nas carreiras pares
+  } else {
+    changeYarn("red");   // Retorna para a cor cinza nas carreiras ímpares
+  }
+  chain(1);  // Faz 1 corrente e vira o trabalho
+  var j = 1;  // Inicializa a variável de controle de pontos
+  repeat j from 1 to 10 {
+    singleCrochet(1);  // Faz um ponto baixo em cada ponto abaixo
+  }
+};
+
+// Construção do cachecol
+foundationRow();  // Executa a carreira de fundação
+turnWork();       // Vira o trabalho para a próxima carreira
+firstRow();       // Executa a primeira carreira de ponto baixo
+turnWork();       // Vira o trabalho para a próxima carreira
+var currentRow = 2;   // Declara a variável de carreira
 
 // Repete a carreira padrão do cachecol para as carreiras 2 até 101
 repeat currentRow from 2 to 101 {
-  if (currentRow % 2 == 0) {
-    changeYarn("white");  // Muda a cor do fio para branco nas carreiras pares
-  } else {
-    changeYarn("gray");   // Retorna para a cor cinza nas carreiras ímpares
-  }
-  chain(1);  // Faz 1 corrente e vira o trabalho
-  var i = 1;  // Inicializa a variável de controle de pontos
-  repeat i from 1 to 10 {
-    singleCrochet(1);  // Faz um ponto baixo em cada ponto abaixo
-  }
+  standardRow(currentRow);  // Aplica a função de carreira padrão
+  turnWork();  // Vira o trabalho para a próxima carreira
   currentRow = currentRow + 1;  // Incrementa o número da carreira
 }
 

@@ -6,7 +6,7 @@ class PrePro:
         return '\n'.join(line.split('--')[0] for line in source.splitlines())
 
 class SymbolTable:
-    reserved_keywords = {'setup', 'and', 'or', 'not', 'if', 'else', 'repeat', 'do', 'end', 'then', 'var', 'function', 'return', 'chain', 'skipChain', 'singleCrochet', 'doubleCrochet', 'trebleCrochet', 'slipStitch', 'changeYarn', 'from', 'to'}
+    reserved_keywords = {'setup', 'and', 'or', 'not', 'if', 'else', 'repeat', 'do', 'end', 'then', 'var', 'function', 'return', 'chain', 'skipChain', 'singleCrochet', 'doubleCrochet', 'trebleCrochet', 'slipStitch', 'changeYarn', 'from', 'to', 'turnWork'}
     
     def __init__(self):
         self.symbols = {}
@@ -400,7 +400,6 @@ class Tokenizer:
                 'setup': 'SETUP',
                 'hookSize': 'HOOK_SIZE',
                 'yarnColor': 'YARN_COLOR',
-                'read': 'READ',
                 'and': 'AND',
                 'or': 'OR',
                 'not': 'NOT',
@@ -422,8 +421,7 @@ class Tokenizer:
                 'changeYarn': 'CHANGE_YARN',
                 'turnWork': 'TURN_WORK',
                 'from': 'FROM',
-                'to': 'TO',
-                'times': 'TIMES'
+                'to': 'TO'
             }
             if value in keywords:
                 self.next = Token(keywords[value], value)
