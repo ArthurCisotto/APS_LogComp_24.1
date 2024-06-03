@@ -29,7 +29,7 @@ setup_commands = { yarn_command | hook_command } ;
 yarn_command = "yarnColor", "=", string_literal ;
 hook_command = "hookSize", "=", number ;
 
-statement =  variable_decl | loop | conditional | command | comment ;
+statement = function_def | variable_decl | loop | conditional | command | comment ;
 
 variable_decl = "var", identifier, "=", expression, ";" ;
 
@@ -55,10 +55,13 @@ multiplicative_expr = unary_expr { mul_op unary_expr } ;
 unary_expr = ["+" | "-"], primary_expr ;
 primary_expr = number | identifier | "(", expression, ")" ;
 
-relational_op = "==" | "!=" | "<" | ">" | "<=" | ">=" ;
+relational_op = "==" | "<" | ">" ;
 add_op = "+" | "-" ;
 mul_op = "*" | "/" | "%" ;
 
+function_def = "function", identifier, "(", [ param_list ], ")", "{", { statement }, "}" ;
+param_list = param { ",", param } ;
+param = identifier ;
 
 comment = "//", { all_characters } ;
 
